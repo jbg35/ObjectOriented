@@ -8,7 +8,7 @@ enum SUIT {
 	HEARTS,
 	CLUBS,
 	DIAMONDS,	
-}
+};
 
 enum RANK {
 	ACE,
@@ -24,7 +24,7 @@ enum RANK {
 	JACK,
 	QUEEN,
 	KING,
-}
+};
 
 class Card {
 private:
@@ -35,7 +35,14 @@ public:
 	Card();
 	~Card(){}
 
-	std::string suitToString() const {
+	Card(RANK rank = ACE , SUIT suit = CLUBS):
+		suit (suit), rank(rank) {}
+
+	SUIT getSuit() { return suit; }
+	RANK getRank() { return rank; }
+
+
+	static std::string suitToString(SUIT suit) {
 		switch(suit) {
 			case SPADES:
 				return "Spades";
@@ -50,7 +57,7 @@ public:
 		}
 	}
 
-	std::string rankToString() const {
+	static std::string rankToString(RANK rank) {
 	switch(rank) {
 		case ACE:
 			return "Ace";
@@ -82,8 +89,7 @@ public:
 			return "bad rank";
 		}
 	}
-
+	std::string name() { return rankToString(rank) + " of " + suitToString(suit); }
 };
-
 
 #endif
