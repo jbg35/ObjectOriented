@@ -1,5 +1,4 @@
-#ifndef DECK_H
-#define DECK_H
+#pragma once
 
 #include <iostream>
 #include <vector>
@@ -20,21 +19,17 @@ public:
       for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 13; j++) {
           deck.push_back(Card(RANK(j), SUIT(i)));
-          std::cout << RANK(j) << "" << SUIT(i) << " ";
+          //std::cout << RANK(j) << "" << SUIT(i) << " ";
         }
-        std::cout << "\n";
+        //std::cout << "\n";
        }
     }
 
-    void shuffle();
+    void shuffle() { std::shuffle(deck.begin(), deck.end(), e); };
     void print();
     ~Deck(){}
 };
 
-void Deck::shuffle() {
-    std::shuffle(deck.begin(), deck.end(), e);
-   
-}
 
 void Deck::print() {
 
@@ -45,4 +40,3 @@ void Deck::print() {
                 std::cout << "\n";
     }
 }
-#endif
