@@ -2,6 +2,8 @@
 #define CARD_H
 
 #include <iostream>
+#include <vector>
+#include <ostream>
 
 enum SUIT {
 	SPADES,
@@ -9,6 +11,16 @@ enum SUIT {
 	CLUBS,
 	DIAMONDS,	
 };
+
+inline std::ostream & operator<<(std::ostream & os, SUIT s) {
+	switch(s) {
+		case HEARTS: return os << "H";
+    	case DIAMONDS: return os << "D";
+    	case CLUBS: return os << "C";
+		case SPADES: return os << "S";
+	}
+	return os; // !!Questionable, added to remove warning
+}
 
 enum RANK {
 	ACE,
@@ -26,6 +38,25 @@ enum RANK {
 	KING,
 };
 
+inline std::ostream & operator<<(std::ostream & os, RANK r){   
+    switch(r){
+    case TWO: return os << "2";
+    case THREE: return os << "3";
+    case FOUR: return os << "4";
+    case FIVE: return os << "5";
+    case SIX: return os << "6";
+    case SEVEN: return os << "7";
+    case EIGHT: return os << "8";
+    case NINE: return os << "9";
+    case TEN: return os << "T";
+    case JACK: return os << "J";
+    case QUEEN: return os << "Q";
+    case KING: return os << "K";
+    case ACE: return os << "A";
+    }
+    return os; // !!Questionable, added to remove warning
+}
+
 class Card {
 private:
 	SUIT suit;
@@ -41,55 +72,12 @@ public:
 	SUIT getSuit() { return suit; }
 	RANK getRank() { return rank; }
 
-
-	static std::string suitToString(SUIT suit) {
-		switch(suit) {
-			case SPADES:
-				return "Spades";
-			case HEARTS:
-				return "Hearts";
-			case CLUBS:
-				return "Clubs";
-			case DIAMONDS:
-				return "Diamonds";
-			default:
-				return "bad suit";
-		}
+	void showCard() {
+		
+		std::cout << RANK(this->rank) << SUIT(this->suit) << " ";
+		
 	}
 
-	static std::string rankToString(RANK rank) {
-	switch(rank) {
-		case ACE:
-			return "Ace";
-		case TWO: 
-			return "Two";
-		case THREE:
-			return "Three";
-		case FOUR:
-			return "Four";
-		case FIVE:
-			return "Five";
-		case SIX:
-			return "Six";
-		case SEVEN:
-			return "Seven";
-		case EIGHT:
-			return "Eight";
-		case NINE:
-			return "Nine";
-		case TEN:
-			return "Ten";
-		case JACK:
-			return "Jack";
-		case QUEEN:
-			return "Queen";
-		case KING:
-			return "King";
-		default:
-			return "bad rank";
-		}
-	}
-	std::string name() { return rankToString(rank) + " of " + suitToString(suit); }
 };
 
 #endif
